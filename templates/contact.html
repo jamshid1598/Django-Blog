@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} Contact {% endblock title %}
+
+{% block content %}
+
+    <form action="POST">
+        {% csrf_token %}
+        <table>
+            <tbody>
+            {{ form.as_table }}
+            </tbody>
+        </table>
+        <button type="submit">Send Message</button>
+    </form>
+    <a href="{% url 'Core:home' %}"><button type="button">Back</button></a>
+  
+{% endblock content %}

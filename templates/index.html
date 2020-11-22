@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} Blog {% endblock title %}
+
+{% block content %}
+      
+    <ul>
+        {{ object_list|length }}
+
+        {% for blog in object_list %}
+            <li class="{% cycle 'left' 'right' %}">
+                {{ forloop.counter }}
+                <ul>
+                    <li><a href="{{ blog.get_absolute_url }} ">{{ blog.blog_title|capfirst }}</a></li>
+                    <li> {{ blog.is_updated|timesince }} - {{ blog.blog_author|default:"Author" }}</li>
+                    <br>
+                    <li>{{ blog.blog_body|safe|truncatewords:25 }}</li>
+                </ul>
+            </li>
+            <br>
+            <br>
+        {% empty %}
+            <p>No Blog is avoilable ;)</p>
+        {% endfor %}
+    </ul>
+
+
+    {% if is_paginated %}
+        {% include "includes/paginator.html" %}
+    {% endif %}
+
+    <br><br>
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+lookup order of the dot operator <=> https://docs.djangoproject.com/en/3.1/ref/templates/language/#template-variables
+
+Custom template tags and filters <=> https://docs.djangoproject.com/en/3.1/howto/custom-template-tags/
+
+Django Utils <=> https://docs.djangoproject.com/en/3.0/ref/utils/#django.utils.encoding.iri_to_uri
+
+NoReverseMatch <=> https://docs.djangoproject.com/en/3.0/ref/exceptions/#django.urls.NoReverseMatch
+
+namespaced URL resolution strategy <=> https://docs.djangoproject.com/en/3.0/topics/http/urls/#topics-http-reversing-url-namespaces
+
+Translation <=> https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#std:templatetag-blocktrans
+
+Django DetailView with pagination for related objects  <=> https://gist.github.com/nspo/5ab1ecde7e918a5fa266298ca5b15f08
+
+
+
+
+12 600
+15 500
+
+
+23 19:00

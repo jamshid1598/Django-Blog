@@ -1,0 +1,11 @@
+<footer>
+    <p style="margin-left: 5%">
+        <a href="{% url 'Core:contact' %}">Contact</a>
+        <a style='margin-left: 2%' href="{% url 'Core:blog-archive' %}">Archive</a>
+    </p>
+    <br>
+    <p style="text-align: center;">
+        {% now "Y" as current_year %}
+        Copyright {{ current_year }}
+    </p>
+</footer>

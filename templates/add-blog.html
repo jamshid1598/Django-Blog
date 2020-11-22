@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} Add Blog {% endblock title %}
+
+{% block content %}
+    <form action="", method="POST">
+        {% csrf_token %}
+        <table>
+            <tbody>
+                {{ form.as_table }}
+            </tbody>
+        </table>
+        <a href="{% url 'Core:home' %}"><button type="button">BACK</button></a> <button type="submit">Save</button>
+    </form>
+    
+{% endblock content %}

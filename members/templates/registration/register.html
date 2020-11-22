@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %} Register {% endblock title %}
+
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <a href="{% url 'Core:home' %}"><button type="button">Back</button></a>
+        <button type="submit">Sign up</button>
+    </form>
+    
+    <small>
+        if you already have an account, you  
+        <a href="{% url 'login' %}"><button type="button">Login</button></a> insted of ...
+    </small>
+
+{% endblock content %}
+    
