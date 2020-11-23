@@ -14,8 +14,8 @@
     <a href="{% url 'Core:home' %}"><button type="button">back</button></a>  
     
     {% if request.user.is_authenticated %}
-        <a href="{% url 'Core:blog-update' object.pk %}"><button type="button">Update</button></a>
-        <a href="{% url 'Core:blog-delete' object.pk %}"><button type="button">Delete</button></a>        
+        <a href="{% url 'Core:blog-update' object.blog_slug %}"><button type="button">Update</button></a>
+        <a href="{% url 'Core:blog-delete' object.blog_slug %}"><button type="button">Delete</button></a>        
     {% endif %}
         
 

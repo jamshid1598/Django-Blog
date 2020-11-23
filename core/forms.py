@@ -1,29 +1,17 @@
 from django import forms
-from .models import Blog
+from .models import Blog, Category
 
 class CreateBlog(forms.ModelForm):
     class Meta:
         model   = Blog
-        fields  = ('blog_title', 'blog_title_tag', 'blog_author', 'blog_body')
+        fields  = ('blog_category', 'blog_title', 'blog_title_tag', 'blog_author', 'blog_body')
         widgets = {
+            'blog_category'  : forms.Select(attrs={'class' : 'blog-category'}),
             'blog_title'     : forms.TextInput(attrs={'placeholder' : 'Title'}),
             'blog_title_tag' : forms.TextInput(attrs={'placeholder' : 'Title Tag'}),
             'blog_author'    : forms.Select(attrs={'placeholder' : 'Author'}),
             'blog_body'      : forms.Textarea(attrs={'placeholder' : 'Blog Content ...'})
         }
-
-
-# class UpdateBlog(forms.ModelForm):
-#     class Meta:
-#         model   = Blog
-#         fields  = ('blog_title', 'blog_title_tag', 'blog_author', 'blog_body')
-#         widgets = {
-#             'blog_title'     : forms.TextInput(attrs={'placeholder' : 'Title'}),
-#             'blog_title_tag' : forms.TextInput(attrs={'placeholder' : 'Title Tag'}),
-#             'blog_author'    : forms.Select(attrs={'placeholder' : 'Author'}),
-#             'blog_body'      : forms.Textarea(attrs={'placeholder' : 'Blog Content ...'})
-#         }
-
 
 
 class ContactForm(forms.Form):

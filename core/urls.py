@@ -13,11 +13,13 @@ from .views import (
 app_name = 'Core'
 
 urlpatterns = [
-    path('',                ArticleListView.as_view(),   name='home'),
-    path('detail/<int:pk>', ArticleDetailView.as_view(), name='blog-detail'),
+    path('', ArticleListView.as_view(), name='home'),
+    path('blog/<slug:category_slug>/', ArticleListView.as_view(), name='category'),
+
+    path('detail/<slug:blog_slug>', ArticleDetailView.as_view(), name='blog-detail'),
     path('create/',         ArticleCreateView.as_view(), name='blog-create'),
-    path('update/<int:pk>/', ArticleUpdateView.as_view(), name='blog-update'),
-    path('delete/<int:pk>/', ArticleDeleteView.as_view(), name='blog-delete'),
+    path('update/<slug:blog_slug>/', ArticleUpdateView.as_view(), name='blog-update'),
+    path('delete/<slug:blog_slug>/', ArticleDeleteView.as_view(), name='blog-delete'),
 
     
     path('archive/', ArticleIndexView.as_view(template_name='blog-archive.html'), name='blog-archive'),
