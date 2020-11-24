@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import (
     ListView,
     DetailView,
@@ -73,11 +73,15 @@ class ArticleDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        kwargs_key = [key for key in self.kwargs]
-        print(kwargs_key)
-        # context['extra_context'] = 
+        # for redirecting to previous page
+        prev_url = self.request.GET.get('next', '')
+        context['prev_url'] = prev_url
+        # defining category object
+        obj = Blog.objects.get(blog_slug=self.kwargs['blog_slug'])
+        category = Category.objects.get(category_name=obj.blog_category)
+        context['category']=category
+        
         return context
-    
 
 class ArticleCreateView(CreateView):
     model         = Blog
@@ -93,7 +97,8 @@ class ArticleUpdateView(UpdateView):
 
     template_name_suffix = '_update_form'
     template_name = 'blog-update.html'
-    
+
+
 class ArticleDeleteView(DeleteView):
     model = Blog
     slug_field = 'blog_slug'

@@ -12,6 +12,7 @@ Translation <=> https://docs.djangoproject.com/en/3.0/topics/i18n/translation/#s
 
 Django DetailView with pagination for related objects  <=> https://gist.github.com/nspo/5ab1ecde7e918a5fa266298ca5b15f08
 
+Classy Class-Based Views <=> https://ccbv.co.uk/
 
 
 

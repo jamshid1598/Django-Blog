@@ -1,15 +1,31 @@
 {% extends 'base.html' %}
 {% block title %} Add Blog {% endblock title %}
 
+
+
 {% block content %}
-    <form action="", method="POST">
-        {% csrf_token %}
-        <table>
-            <tbody>
-                {{ form.as_table }}
-            </tbody>
-        </table>
-        <a href="{% url 'Core:home' %}"><button type="button">BACK</button></a> <button type="submit">Save</button>
-    </form>
-    
+    {% if request.user.is_authenticated %}
+        <form action="", method="POST">
+            {% csrf_token %}
+            <table>
+                <tbody>
+                    {{ form.as_table }}
+                </tbody>
+            </table>
+            <button type="submit">Save</button>
+        </form>
+    {% else %}
+        You are not allowed for this action (this means current user "actually this is you" may not login or this blog is not yours ;))
+        <br><br>
+        <a href="{% url 'login' %}?next={{ request.path }}"><button type="submit">login</button></a> 
+    {% endif %}
+    <a href="{% url 'Core:home' %}"><button type="button">BACK</button></a>
+
+    <!-- Creating user instance by passing requested user id -->
+    <script>
+        var user_id = "{{ request.user.id }}";
+        document.getElementById('username').value=user_id;
+    </script>
+    <!-- end -->
+
 {% endblock content %}

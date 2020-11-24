@@ -9,7 +9,8 @@ class CreateBlog(forms.ModelForm):
             'blog_category'  : forms.Select(attrs={'class' : 'blog-category'}),
             'blog_title'     : forms.TextInput(attrs={'placeholder' : 'Title'}),
             'blog_title_tag' : forms.TextInput(attrs={'placeholder' : 'Title Tag'}),
-            'blog_author'    : forms.Select(attrs={'placeholder' : 'Author'}),
+            # 'blog_author'    : forms.Select(attrs={'placeholder' : 'Author'}),
+            'blog_author'    : forms.TextInput(attrs={'id':'username', 'type':'hidden', 'value' : ''}),
             'blog_body'      : forms.Textarea(attrs={'placeholder' : 'Blog Content ...'})
         }
 
