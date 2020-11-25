@@ -10,18 +10,35 @@
 
     <p>Curront time is {% now "SHORT_DATETIME_FORMAT" %}</p>
 
-    <p>{{ object.blog_body|safe|urlize }}</p>
-   
+    <p>{{ object.blog_body|safe|urlize }}</p>  
+
+    {% if request.user.is_authenticated %}
+        <form action="{% url 'Core:blog-like' object.blog_slug %}" method="post">
+            {% csrf_token %}
+            
+            {% if is_liked %}
+                <button type="submit" name="blog_id" value="{{ object.id }}" class="btn btn-info" >Unlike</button>
+            {% else %}
+                <button type="submit" name="blog_id" value="{{ object.id }}" class="btn btn-info" >Like</button>
+            {% endif %}
+
+        </form>
+    {% else %}
+        <a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to like this article!</a><br>
+    {% endif %}
+    <strong> {{ total_likes }} Like{{ total_likes|pluralize }}</strong>
+    
+        <br><br>
+
+    {% if request.user.is_authenticated  and request.user.id == object.blog_author.id %}
+        <a href="{% url 'Core:blog-update' object.blog_slug  %}"><button type="button">Update</button></a>
+        <a href="{% url 'Core:blog-delete' object.blog_slug %}"><button type="button">Delete</button></a>        
+    {% endif %}
+
     {% if prev_url %}
         <a href="{{ prev_url }}"><button type="button">back</button></a>
     {% else %}
         <a href="{% url 'Core:home' %}"><button type="button">back</button></a>
-    {% endif %}
-      
-    
-    {% if request.user.is_authenticated  and request.user.id == object.blog_author.id %}
-        <a href="{% url 'Core:blog-update' object.blog_slug  %}"><button type="button">Update</button></a>
-        <a href="{% url 'Core:blog-delete' object.blog_slug %}"><button type="button">Delete</button></a>        
     {% endif %}
         
 

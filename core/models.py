@@ -21,13 +21,14 @@ class Category(models.Model):
         return reverse("Core:blog-category", kwargs={"category_slug": self.category_slug})
 
 class Blog(models.Model):
-    blog_title = models.CharField(max_length=350, verbose_name='Title', unique=True)
-    blog_slug = models.SlugField(max_length=350)
+    blog_title     = models.CharField(max_length=350, verbose_name='Title', unique=True)
+    blog_slug      = models.SlugField(max_length=350)
     blog_title_tag = models.CharField(max_length=350, verbose_name='Title Tag')
-    blog_body = models.TextField(verbose_name='Body')
+    blog_body      = models.TextField(verbose_name='Body')
 
-    blog_author = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Author')
+    blog_author   = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Author')
     blog_category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
+    blog_like     = models.ManyToManyField(User, related_name='blog_like') 
 
     blog_published = models.DateTimeField(auto_now_add=True)
     blog_updated   = models.DateTimeField(auto_now=True)
@@ -52,6 +53,9 @@ class Blog(models.Model):
             return self.blog_published
         else:
             return self.blog_updated
+
+    def total_likes(self):
+        return self.blog_like.count()
 
 
 

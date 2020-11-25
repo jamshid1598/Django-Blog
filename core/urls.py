@@ -8,6 +8,9 @@ from .views import (
 
     ContactFormView,
     ArticleIndexView,
+
+    # function based view
+    BlogPostLikes,
 )
 
 app_name = 'Core'
@@ -20,6 +23,8 @@ urlpatterns = [
     path('create/',         ArticleCreateView.as_view(), name='blog-create'),
     path('update/<slug:blog_slug>/', ArticleUpdateView.as_view(), name='blog-update'),
     path('delete/<slug:blog_slug>/', ArticleDeleteView.as_view(), name='blog-delete'),
+
+    path('blog-like/<slug:blog_slug>/', BlogPostLikes, name='blog-like'),
 
     
     path('archive/', ArticleIndexView.as_view(template_name='blog-archive.html'), name='blog-archive'),

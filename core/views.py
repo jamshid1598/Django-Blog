@@ -1,5 +1,6 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
+from django.views import View
 from django.views.generic import (
     ListView,
     DetailView,
@@ -73,14 +74,24 @@ class ArticleDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        
         # for redirecting to previous page
         prev_url = self.request.GET.get('next', '')
         context['prev_url'] = prev_url
+        
         # defining category object
         obj = Blog.objects.get(blog_slug=self.kwargs['blog_slug'])
         category = Category.objects.get(category_name=obj.blog_category)
         context['category']=category
         
+        # blog like
+        likes_connected = get_object_or_404(Blog, blog_slug=self.kwargs['blog_slug'])
+        liked=False
+        if likes_connected.blog_like.filter(id=self.request.user.id).exists():
+            liked=True
+        context['total_likes']=likes_connected.total_likes()
+        context['is_liked']=liked
+
         return context
 
 class ArticleCreateView(CreateView):
@@ -128,3 +139,23 @@ class ArticleIndexView(ArchiveIndexView):
         date_field = 'blog_updated'
     else:
         date_field = 'blog_published'
+
+
+
+def BlogPostLikes(request, blog_slug):
+    blog_post=get_object_or_404(Blog, id=request.POST.get('blog_id'))
+    if blog_post.blog_like.filter(id=request.user.id).exists():
+        blog_post.blog_like.remove(request.user)
+    else:
+        blog_post.blog_like.add(request.user)
+    
+    return HttpResponseRedirect(reverse('Core:blog-detail', args=[str(blog_slug)]))
+        
+
+
+# class BlogPostLikes(View):
+#     def get(self, request, pk, *args, **kwargs):
+#         pass
+    
+#     def post(self, request, pk, *args, **kwargs):
+#         pass
