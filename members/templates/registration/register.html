@@ -6,7 +6,11 @@
     <form action="" method="post">
         {% csrf_token %}
 
-        {{ form.as_p }}
+        <table>
+            <tbody>
+                {{ form.as_table }}
+            </tbody>
+        </table>
 
         <a href="{% url 'Core:home' %}"><button type="button">Back</button></a>
         <button type="submit">Sign up</button>
