@@ -17,11 +17,11 @@ class BlogCategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category, BlogCategoryAdmin)
 
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('blog_category', 'blog_title', 'blog_title_tag', 'blog_author', 'blog_published', 'blog_updated', )
+    list_display       = ('blog_category', 'blog_title', 'blog_title_tag', 'blog_author', 'blog_published', 'blog_updated', )
     list_display_links = ( 'blog_title',)
-    list_editable     = ('blog_category', 'blog_title_tag', 'blog_author')
-    ordering     = ('blog_category', 'blog_title', 'blog_author', 'blog_published', 'blog_updated',)
-    search_fields = ('blog_category', 'blog_title', 'blog_title_tag', 'blog_author')
+    list_editable      = ('blog_category', 'blog_title_tag', 'blog_author')
+    ordering           = ('blog_category', 'blog_title', 'blog_author', 'blog_published', 'blog_updated',)
+    search_fields      = ('blog_category', 'blog_title', 'blog_title_tag', 'blog_author')
 
     prepopulated_fields = {'blog_slug': ('blog_title',)}
 

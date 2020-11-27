@@ -16,7 +16,6 @@
         <!-- {{ object_list|length }} -->
 
         {% for blog in object_list %}
-            <p>Author {{ blog.blog_author.id }}</p>
             <li class="{% cycle 'left' 'right' %}">
                 {{ forloop.counter }}
                 <ul>

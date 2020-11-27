@@ -1,5 +1,6 @@
 from django import forms
 from .models import Blog, Category
+from tinymce.widgets import TinyMCE
 
 class CreateBlog(forms.ModelForm):
     class Meta:
@@ -11,7 +12,7 @@ class CreateBlog(forms.ModelForm):
             'blog_title_tag' : forms.TextInput(attrs={'placeholder' : 'Title Tag'}),
             # 'blog_author'    : forms.Select(attrs={'placeholder' : 'Author'}),
             'blog_author'    : forms.TextInput(attrs={'id':'username', 'type':'hidden', 'value' : ''}),
-            'blog_body'      : forms.Textarea(attrs={'placeholder' : 'Blog Content ...'})
+            'blog_body'      : TinyMCE(attrs={'placeholder' : 'Blog Content ...'})
         }
 
 
@@ -22,3 +23,4 @@ class ContactForm(forms.Form):
     
     def send_email(self):
         pass
+

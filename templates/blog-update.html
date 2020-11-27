@@ -9,6 +9,7 @@
             {% csrf_token %}
             <table>
                 <tbody>
+                    {{ form.media }}
                     {{ form.as_table }}
                 </tbody>
             </table>
