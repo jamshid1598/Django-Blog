@@ -71,6 +71,7 @@ INSTALLED_APPS = [
 
     # 3rd party apps
     'tinymce',
+    'rest_framework',
 
     # local apps
     'core.apps.CoreConfig',
