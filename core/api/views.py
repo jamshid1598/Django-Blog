@@ -8,3 +8,6 @@ from .serializers import BlogSerializer
 class BlogListAPIView(ListAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
+
+
+
